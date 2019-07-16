@@ -2,8 +2,8 @@ dispatch:
   - url: "binderapp.xyz/*"
     service: default
 
-  - url: "*api.binderapp.xyz/*"
+  - url: "api.binderapp.xyz/*"
     service: api-service
 
-  - url: "*mongo.binderapp.xyz/*"
+  - url: "mongo.binderapp.xyz/*"
     service: mongo-service
