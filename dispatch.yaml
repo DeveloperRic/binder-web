@@ -5,8 +5,5 @@ dispatch:
   - url: "*api.binderapp.xyz/*"
     service: api-service
 
-  - url: "*download.binderapp.xyz/*"
-    service: download-service
-
   - url: "*mongo.binderapp.xyz/*"
     service: mongo-service
