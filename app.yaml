@@ -1,0 +1,8 @@
+env: flex
+runtime: nodejs10
+automatic_scaling:
+  max_concurrent_requests: 15
+handlers:
+  - url: .*
+    script: auto
+    secure: always

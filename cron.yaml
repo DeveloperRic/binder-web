@@ -1,0 +1,13 @@
+cron:
+- description: "collect mongodb garbage"
+  url: /collect-garbage
+  schedule: every day 00:00
+  target: mongo-service
+- description: "refresh block/file/plan sizes"
+  url: /refresh-sizes
+  schedule: every day 01:00
+  target: mongo-service
+- description: "validate user info / send un-verified users a reminder to verify"
+  url: /auth0-checkup
+  schedule: every day 06:00
+  target: mongo-service
