@@ -1,0 +1,16 @@
+{
+  "prod": {
+    "role": "web",
+    "pass": "dDbUSRI4hPWoPFzH",
+    "host": "binder-hkqjh.gcp.mongodb.net",
+    "db": "test",
+    "opts": "?retryWrites=true&w=majority"
+  },
+  "dev": {
+    "role": "web",
+    "pass": "dDbUSRI4hPWoPFzH",
+    "host": "binder-hkqjh.gcp.mongodb.net",
+    "db": "test",
+    "opts": "?retryWrites=true&w=majority"
+  }
+}
