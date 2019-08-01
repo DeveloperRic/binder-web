@@ -1,39 +1,37 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var favicon = require("serve-favicon");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var expressValidator = require("express-validator");
-var session = require("express-session");
-var dotenv = require("dotenv");
-var passport = require("passport");
-var Auth0Strategy = require("passport-auth0");
-var MongoStore = require("connect-mongo")(session);
-var mongoose = require("mongoose");
-// var cors = require("cors");
+const path = require("path");
+const express = require("express");
+// const session = require("express-session");
+const expressValidator = require("express-validator");
+// const passport = require("passport");
+// const MongoStore = require("connect-mongo")(session);
+const mongoose = require("mongoose");
+const createError = require("http-errors");
+const favicon = require("serve-favicon");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-mongoose.set('useFindAndModify', false);
+require("dotenv").config();
+
+const G = require("./config/globals");
+const { getMongodbKey } = require("./security/keyManagement");
+const { DEV_MODE } = require("./prodVariables");
+
+mongoose.set("useFindAndModify", false);
 mongoose
-  .connect("mongodb+srv://web:dDbUSRI4hPWoPFzH@binder-hkqjh.gcp.mongodb.net/test?retryWrites=true&w=majority", {
+  .connect(getMongodbKey(), {
     useNewUrlParser: true,
     useCreateIndex: true
   })
   .then(() => console.log("Connected to MongoDB database"))
   .catch(err => console.error("Failed to connect to database", err));
 
-const G = require("./config/globals");
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/user");
-
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -50,25 +48,22 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 
 // Express session
-let sesh = {
-  secret: "$2a$10$JoQJPkqmDHBcfql.C9hEWOSt4J76dy8CNvIVKjCKwiFWFjLVfXRZi",
-  saveUninitialized: true,
-  resave: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: {} //  maxAge: 120 * 60 * 1000  2 hours later experies the session
-};
-if (app.get("env") === "production") {
-  sesh.cookie.secure = true; // serve secure cookies, requires https
-}
-app.use(session(sesh));
+// let sesh = {
+//   secret: "$2a$10$JoQJPkqmDHBcfql.C9hEWOSt4J76dy8CNvIVKjCKwiFWFjLVfXRZi",
+//   saveUninitialized: true,
+//   resave: false,
+//   store: new MongoStore({ mongooseConnection: mongoose.connection }),
+//   cookie: {} //  maxAge: 120 * 60 * 1000  2 hours later experies the session
+// };
+// if (app.get("env") === "production") {
+//   sesh.cookie.secure = true; // serve secure cookies, requires https
+// }
+// app.use(session(sesh));
 
-app.use(function(req, res, next) {
-  res.locals.session = req.session;
-  next();
-});
-
-// Dotenv init
-dotenv.config();
+// app.use(function(req, res, next) {
+//   res.locals.session = req.session;
+//   next();
+// });
 
 // Passport initialize
 // // - auth0 strategy
@@ -88,23 +83,23 @@ dotenv.config();
 //     }
 //   )
 // );
-// - Serialize user
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-// - Deserialize user
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-// - finalise passport setup
-app.use(passport.initialize());
-app.use(passport.session());
+// // - Serialize user
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
+// // - Deserialize user
+// passport.deserializeUser(function(user, done) {
+//   done(null, user);
+// });
+// // - finalise passport setup
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Express validator
 app.use(
   expressValidator({
     errorFormatter: function(param, msg, value) {
-      var namespace = param.split("."),
+      let namespace = param.split("."),
         root = namespace.shift(),
         formParam = root;
       while (namespace.lenght) {
@@ -119,8 +114,8 @@ app.use(
   })
 );
 
-app.use("/", indexRouter);
-app.use("/user", usersRouter);
+app.use("/", require("./routes/index"));
+app.use("/user", require("./routes/user"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -131,7 +126,8 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  //req.app.get("env") === "development" ?
+  res.locals.error = DEV_MODE ? err : {};
 
   // render the error page
   res.status(err.status || 500);

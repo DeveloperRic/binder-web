@@ -6,12 +6,12 @@ cron:
 
 - description: "(deep) collect mongodb garbage"
   url: /collect-garbage-deep
-  schedule: every sunday 00:00
+  schedule: every sunday 01:00
   target: mongo-service
 
 - description: "refresh block/file/plan sizes"
   url: /refresh-sizes
-  schedule: every day 01:00
+  schedule: every day 02:00
   target: mongo-service
 
 - description: "validate user info / send un-verified users a reminder to verify"
