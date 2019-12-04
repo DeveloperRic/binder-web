@@ -115,6 +115,7 @@ app.use(
 );
 
 app.use("/", require("./routes/index"));
+app.use("/legal", require("./routes/legal"));
 app.use("/user", require("./routes/user"));
 
 // catch 404 and forward to error handler
