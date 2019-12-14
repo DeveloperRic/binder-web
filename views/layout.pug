@@ -41,15 +41,14 @@ html
       .links
         a(href="/legal") Legal
         a(href="/support") Support
-        a(href="/careers") Work With Us
+        //- a(href="/careers") Work With Us
       if !!footerDisclaimers
         .disclaimers.text-muted
           each disclaimer in footerDisclaimers
             | !{disclaimer}
     .main.bg-darker.color-muted
       .title
-        //- TODO change this to Binder Cloud Backup
-        //- once you're registered
+        //- TODO change this to Binder Cloud Backup once you're registered
         | Copyright © Victor Olaitan 2019 All rights reserved
       .address
         | Ottawa, ON, Canada

@@ -32,6 +32,7 @@ section {
 
 #header .row {
   min-width: 100%;
+  margin: 0;
   flex-direction: column;
 }
 
@@ -78,67 +79,13 @@ section {
   box-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.2);
 }
 
+@media (max-width: 768px) {
+  #links {
+    margin-bottom: 30px;
+  }
+  #links .link {
+    padding-bottom: 15px;
+  }
+}
+
 /* ------------------------------------- */
-
-.main {
-  padding: 20px 10px 20px 30px;
-  /* box-shadow: 0 1px 3px #bdbdbd; */
-  z-index: 1;
-}
-
-.main hr {
-  margin-right: 25%;
-  border-top-color: #e0e0e0;
-}
-
-.main p + p {
-  margin-top: 25px;
-}
-
-.main + .main {
-  padding-top: 0;
-  box-shadow: unset;
-}
-
-.main .content {
-  margin: 0;
-}
-
-.main .content img {
-  /* padding-left: 20px; */
-  object-fit: cover;
-  object-position: center;
-}
-
-.main .content .img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main .content .img i {
-  font-size: 70px;
-  color: #616161;
-}
-
-.main .content h1 {
-  margin-bottom: 30px;
-  margin-left: 25px;
-  color: #009688;
-}
-
-.main .content .left {
-  display: flex;
-  /* flex-grow: 0.6;
-  max-width: 60%; */
-  padding-top: 40px;
-  flex-direction: column;
-  z-index: 1;
-}
-
-.main .content .left .text {
-  padding: 20px;
-  border-radius: 10px;
-  font-size: 16px;
-  /* background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); */
-}

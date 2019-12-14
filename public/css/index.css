@@ -40,7 +40,7 @@ section {
 
 #intro .top {
   display: flex;
-  margin: 1.5%;
+  margin: 2vh 2vw;
   justify-content: space-between;
   color: #f5f5f5;
   z-index: 1;
@@ -110,7 +110,8 @@ section {
 #intro .mid .right img {
   flex-grow: 1;
   width: 100%;
-  margin-bottom: 10vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
   object-fit: contain;
   object-position: center;
 }
@@ -152,6 +153,68 @@ section {
   margin-right: 7px;
 }
 
+@media (max-width: 900px) {
+  #intro .mid .text {
+    font-size: 40px;
+  }
+
+  #intro .mid .text * {
+    font-size:  40px !important;
+  }
+
+  #intro .mid .right img {
+    flex-grow: 0.5;
+    width: 80%;
+    margin-top: 10vh;
+  }
+}
+
+@media (max-width: 600px) {
+  #intro .mid {
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  #intro .mid .text {
+    width: 80%;
+    margin: 10px 15% 0 5%;
+    font-size: 36px;
+  }
+
+  #intro .mid .text * {
+    font-size:  36px !important;
+  }
+
+  #intro .mid .right {
+    width: 100%;
+    z-index: -1;
+  }
+
+  #intro .mid .right img {
+    width: 60%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  #intro .bottom {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  #intro .mid .text {
+    margin-top: 10%;
+  }
+
+  #intro .mid .right img {
+    flex-grow: 0.3;
+  }
+
+  #intro .bottom {
+    display: none;
+  }
+}
+
 /* ------------------------------------- */
 
 #press {
@@ -178,7 +241,7 @@ section {
 }
 
 #press .publishers img {
-  height: 30px;
+  height: 6vh;
   object-fit: cover;
 }
 
@@ -187,7 +250,16 @@ section {
 }
 
 #press .publishers .ph {
-  height: 60px;
+  height: 12vh;
+}
+
+@media (max-width: 500px) {
+  #press .publishers img {
+    height: 4vh;
+  }
+  #press .publishers .ph {
+    height: 10vh;
+  }
 }
 
 /* ------------------------------------- */
@@ -306,4 +378,26 @@ section {
   border-radius: 10px;
   font-size: 16px;
   /* background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); */
+}
+
+@media (max-width: 600px) {
+  .main .content {
+    flex-direction: column;
+  }
+  .main .content .left {
+    order: 1;
+  }
+  .main .content .img {
+    padding-top: 40px;
+    order: 0;
+  }
+  .main .content .img i {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .main .content .left .text {
+    font-size: 14px;
+  }
 }

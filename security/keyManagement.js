@@ -2,7 +2,6 @@ module.exports = (() => {
   const fs = require("fs");
   const { DEV_MODE, srcDir } = require("../prodVariables");
 
-  //TODO assign different databases for development
   let mongodbKey;
 
   /**
